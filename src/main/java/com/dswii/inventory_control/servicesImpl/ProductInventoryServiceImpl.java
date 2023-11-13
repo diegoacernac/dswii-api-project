@@ -6,6 +6,7 @@ import com.dswii.inventory_control.repositories.ProductInventoryRepository;
 import com.dswii.inventory_control.services.ProductInventoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +18,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     private final ProductInventoryRepository productInventoryRepository;
 
     @Override
+    @Transactional
     public List<ProductInventory> findAll() throws Exception {
         try {
             return productInventoryRepository.findAll();
@@ -26,6 +28,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
     @Override
+    @Transactional
     public List<ProductInventory> findAllActive() throws Exception {
         try {
             return productInventoryRepository
@@ -39,6 +42,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
     @Override
+    @Transactional
     public ProductInventory findById(Long id) throws Exception {
         try {
             return productInventoryRepository.findById(id).orElse(null);
@@ -48,6 +52,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
     @Override
+    @Transactional
     public ProductInventory save(ProductInventory productInventory) throws Exception {
         try {
             return productInventoryRepository.save(productInventory);
@@ -57,6 +62,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
     @Override
+    @Transactional
     public ProductInventory update(Long id, ProductInventory productInventory) throws Exception {
         try {
             boolean isPresent = productInventoryRepository.findById(id).isPresent();
@@ -67,6 +73,7 @@ public class ProductInventoryServiceImpl implements ProductInventoryService {
     }
 
     @Override
+    @Transactional
     public ProductInventory delete(Long id) throws Exception {
         try {
             Optional<ProductInventory> optionalProductInventory = productInventoryRepository.findById(id);
